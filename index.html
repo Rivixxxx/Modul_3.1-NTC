@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Подключение к серверу мониторинга (на примере Wialon)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            background: #f8fafc;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #2563eb;
+            font-size: 2rem;
+            border-bottom: 2px solid #2563eb;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.25rem;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2563eb;
+            font-size: 1.75rem;
+            border-bottom: 1px solid #e5e7eb;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.2rem;
+            font-weight: 600;
+        }
+        h3 {
+            color: #2563eb;
+            font-size: 1.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        h4 {
+            color: #2563eb;
+            font-size: 1.25rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        section, .section {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+        .step {
+            background: #f8fafc;
+            border-left: 4px solid #3b82f6;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            border-radius: 4px;
+        }
+        blockquote {
+            margin: 10px 0;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-style: italic;
+        }
+        blockquote.info {
+            background: #d1ecf1;
+            border-left: 4px solid #38bdf8;
+        }
+        blockquote.warn {
+            background: #fff3cd;
+            border-left: 4px solid #facc15;
+        }
+        blockquote.success {
+            background: #d4edda;
+            border-left: 4px solid #22c55e;
+        }
+        .toc {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 30px;
+        }
+        .toc-title {
+            font-weight: bold;
+            font-size: 1.25rem;
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+        .toc a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        .btn {
+            background: #3b82f6;
+            color: #fff;
+            border-radius: 4px;
+            padding: 8px 16px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 1rem;
+        }
+        .btn:hover {
+            background: #2563eb;
+        }
+        code, pre {
+            background: #f1f5f9;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        code {
+            padding: 2px 4px;
+            font-size: 1em;
+        }
+        pre {
+            padding: 10px;
+            font-size: 1em;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+        }
+        th {
+            background: #f8fafc;
+        }
+        img {
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            margin: 1.5rem 0;
+            max-width: 100%;
+            height: auto;
+        }
+        @media print {
+            .no-print { display: none !important; }
+            section, .section { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+<main class="max-w-3xl mx-auto py-8">
+<section>
+    <p>Настроить терминал на работу с сервером мониторинга можно несколькими способами:</p>
+    <ol class="step">
+        <li>При помощи конфигуратора</li>
+        <li>По SMS</li>
+    </ol>
+
+    <h1>Настройка через NTC Configurator</h1>
+    <p>Этот способ позволяет настроить весь, доступный для устройства функционал. Однако, если требуется просто подключить устройство к серверу и обеспечить передачу стандартного набора навигационной информации, то для этого требуется всего несколько простых операций.</p>
+    <ol class="step">
+        <li>Запустите программу NTC Configurator</li>
+    </ol>
+    <img alt="2022-07-14_171313.png" src="images/2022-07-14_171313.png">
+    <blockquote class="info">
+        <p>Если у Вас нет программы NTC Configurator, то скачать её можно <a class="btn" href="/programs/ntc_configurator/ntc_configurator_last.exe"><i class="fa fa-download"></i> по этой ссылке</a>.<br>После скачивания установите программу <strong>от имени администратора</strong>.</p>
+    </blockquote>
+    <ol start="2" class="step">
+        <li>Подключите устройство к конфигуратору, подождите пока устройство свяжется с конфигуратором. Когда это произойдет, Вы увидите информацию об устройстве.</li>
+    </ol>
+    <img alt="2022-07-14_171648.png" src="images/2022-07-14_171648.png">
+    <ol start="3" class="step">
+        <li>Создайте новую конфигурацию, нажав на кнопку "Создание новой конфигурации". Программа сформирует рекомендуемые настройки для этого типа устройства.</li>
+    </ol>
+    <img alt="2022-07-14_171733.png" src="images/2022-07-14_171733.png">
+    <ol start="4" class="step">
+        <li>На вкладке <code>Передача данных</code> в полях <code>APN</code>, <code>Логин</code> и <code>Пароль</code> укажите настройки для подключения к Internet.</li>
+    </ol>
+    <p>В примере использованы настройки доступа в Internet для SIM-карт M2MExpress:<br>
+    <code>APN</code> = <code>interet.mts.ru</code><br>
+    <code>Логин</code> = <code>mts</code><br>
+    <code>Пароль</code> = <code>mts</code></p>
+    <img alt="2024-02-21_085445.png" src="images/2024-02-21_085445.png">
+    <blockquote class="info">
+        <p>Эти параметры зависят от сотового оператора, SIM-карта которого будет установлена в устройство. Значения этих параметров Вы можете узнать в службе технической оператора сотовой связи.<br>
+        Также, если оставить поля незаполненными, то устройство постарается самостоятельно подобрать нужные значения для известных операторов. Список известных операторов приведен в таблице, которую Вы можете просмотреть нажав на кнопку</p>
+    </blockquote>
+    <ol start="5" class="step">
+        <li>На вкладке "Передача данных" укажите IP/DNS и Порт сервера мониторинга.</li>
+    </ol>
+    <p>Для линейки устройств Navtelecom 24хх в системе Wialon необходимо использовать IP-адрес <code>193.193.165.165</code> и порт <code>21626</code>.</p>
+    <img alt="2022-07-14_174949.png" src="images/2022-07-14_174949.png">
+    <blockquote class="info">
+        <p>Значения IP/DNS и Порта обычно индивидуальны для каждого типа оборудования. Значения этих параметров Вы можете узнать в службе технической поддержки сервера мониторинга.</p>
+    </blockquote>
+    <p>Пример для сервера Wialon:</p>
+    <div class="overflow-x-auto">
+    <table>
+        <thead>
+            <tr>
+                <th>Модель устройства</th>
+                <th>Порт</th>
+                <th>IP-адрес</th>
+                <th>DNS-имя</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>START  S-20xx</td>
+                <td>22347</td>
+                <td rowspan="4">193.193.165.165</td>
+                <td rowspan="4">nl.gpsgsm.org</td>
+            </tr>
+            <tr>
+                <td>SMART  S-24xx</td>
+                <td>21626</td>
+            </tr>
+            <tr>
+                <td>SIGNAL S-26xx</td>
+                <td>21889</td>
+            </tr>
+            <tr>
+                <td>SIGNAL S-46xx</td>
+                <td>22102</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <p>Остальные настройки следует оставить как есть.</p>
+    <ol start="7" class="step">
+        <li><em>(не обязательно)</em> Теперь можно перейти к проверке подключения</li>
+    </ol>
+    <ul class="step">
+        <li>откройте окно логов</li>
+    </ul>
+    <img alt="2022-07-14_175544.png" src="images/2022-07-14_175544.png">
+    <ul class="step">
+        <li>выберите <strong>пользовательский</strong> лог GSM и нажмите кнопку запуска лога</li>
+    </ul>
+    <img alt="2022-07-14_175746.png" src="images/2022-07-14_175746.png">
+    <ul class="step">
+        <li>когда устройство попытается установить связь с сервером Вы увидите</li>
+    </ul>
+    <pre>Подключение к серверу № 1: TCP 193.193.165.165:21626, протокол FLEX 1.0</pre>
+    <ul class="step">
+        <li>когда процедура авторизации будет успешно завершена Вы увидите</li>
+    </ul>
+    <pre>Соединение с сервером № 1 установлено</pre>
+
+    <h1>Настройка через SMS</h1>
+    <p>Этот способ позволяет настроить практически весь, доступный для устройства функционал. Но некоторые настройки задать при помощи SMS крайне сложно. Тем не менее для настройки сервера мониторинга или параметров отрисовки трека этот способ может оказаться самым быстрым.</p>
+    <blockquote class="warn">
+        <p>Настройка производится при помощи команд EDITS, подробно об их особенностях и возможных проблемах написано <a href="/ru/home/devices/commands/edits_cmd">в этой статье</a>.</p>
+    </blockquote>
+    <p>Перед формированием SMS узнайте следующие данные:</p>
+    <ul class="step">
+        <li><code>APN</code>, <code>Логин</code> и <code>Пароль</code> для выхода в Internet<br>
+        <em>(эту информацию можно узнать у оператора сотовой связи, SIM-карта которого будет работать в устройстве)</em></li>
+        <li><code>IP/DNS</code> и <code>Порт</code> сервера<br>
+        <em>(эту информацию можно узнать в службе технической поддержки системы мониторинга на которую настраивается устройство)</em></li>
+    </ul>
+    <p>После получения всех данных можно сформировать SMS:<br>
+    <em>(для наглядности все данные взяты из примера "Настройка через программу NTC Configurator")</em></p>
+    <pre>*!EDITS TRANS:SRV1(,,,193.193.165.165,21626),AP1(internet.mts.ru,mts,mts)</pre>
+    <p>После выполнения этой команды устройство ответит в формате</p>
+    <pre>*!EDITS OK, ...</pre>
+    <p>Теперь следует ожидать пока устройство подключится к серверу мониторинга.</p>
+</section>
+</main>
+</body>
+</html>
